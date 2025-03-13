@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ReportController;
 
 // Halaman Home
 Route::get('/', [HomeController::class, 'index']);
@@ -23,18 +25,10 @@ Route::get('/user/{id}/name/{name}', [UserController::class, 'show']);
 // Halaman Penjualan
 Route::get('/sales', [SalesController::class, 'index']);
 
+// Resource Routes untuk CRUD otomatis
+Route::resource('products', ProductController::class);
+Route::resource('transactions', TransactionController::class);
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+//untuk laporan penjualan
+Route::get('/report', [ReportController::class, 'financialReport'])->name('financial.report');
 
-Route::get('/', function () {
-    return view('welcome');
-});
